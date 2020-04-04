@@ -18,6 +18,13 @@ Parameters:
     MinLength: '5'
     MaxLength: '10'
     ConstraintDescription:  the Usergiven name must be awesome 
+  GroupGivenName:
+    NoEcho: 'false'
+    Type: String
+    Description: Pls enter ur group name for ur IAM account(this is what i saw in templates)
+    MinLength: '5'
+    MaxLength: '10'
+    ConstraintDescription:  the Group name must be hillarious  
 Resources:
   CFNUser:
     Type: AWS::IAM::User
@@ -27,8 +34,12 @@ Resources:
         Password: !Ref 'Password'
   CFNUserGroup:
     Type: AWS::IAM::Group
+    Properties:
+      GroupName: !Ref 'GroupGivenName' 
   CFNAdminGroup:
     Type: AWS::IAM::Group
+    Properties:
+      GroupName: Admin-Group
   Users:
     Type: AWS::IAM::UserToGroupAddition
     Properties:
